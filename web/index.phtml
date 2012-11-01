@@ -46,19 +46,6 @@ $diff = implode(', ', $diff) . ' ago';
 		<!-- Navigation and Content sliding effects -->
 		<script type="text/javascript">
 			$(document).ready(function(){
-				tweetUrl = 'http://api.twitter.com/1/statuses/user_timeline.json';
-				$.getJSON(  
-	                tweetUrl,  
-	                {
-						screen_name: 'NoCoolName_Tom',
-						count: 1
-					},  
-	                function(json) {  
-	                    window.resulting = json.responseData.language;
-	                    result = window.resulting;
-	                    $("#result").html(result);  
-	                }  
-	            );
 				$('#navigation span.about').css('opacity','0.6');
 				$('ul#navigation li').hover(function(){
 					$(this).stop().animate({marginRight:6}, 250);
@@ -106,7 +93,7 @@ $diff = implode(', ', $diff) . ' ago';
 				<div id="container">
 					<ul id="content">
 						<li id="about" class="content-block">
-							<img src="//static.tomdoggett.net/images/photo.jpg" alt="photo">
+							<img src="//<?=$static?>/images/photo.jpg" alt="photo">
 							<h2 class="name"><small>Hi! I'm</small>Tom Doggett</h2>
 							<p>I am a programmer: I enjoy backend web engineering and Linux programming in particular.  I seek continuously to better my skills.  I enjoy the challenge of solving a good puzzle: this is what has led me to enjoy learning and using such things as <img src="http://s.wordpress.com/latex.php?latex=\LaTeX&bg=transparent&fg=111111&s=0" class="latexlogo" alt="LaTeX"/>, AWS, vim, and even Haskell.  I try to always keep on top of new skills that will teach me good habits, such as unit testing and trying to correctly use various design patterns.  I get a thrill from finding clever and concise solutions to tricky problems.  I am driven to produce good, clean code quickly.  And, programming aside, I'm a nice guy and I enjoy having fun with many varied activities like biking, writing, model rocketry, ancient languages, and video games.</p>
 							<h3>My best skills:</h3>
