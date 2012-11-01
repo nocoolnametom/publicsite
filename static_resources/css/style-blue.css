@@ -304,8 +304,9 @@ li#social {
 		color: #17c;
 	}
 
-.facebook a {
-	background: url("../images/facebook.png") no-repeat center left;
+.stackoverflow a {
+	background: url("../images/stackoverflow.png") no-repeat center left;
+	background-position: 3px 4px;
 }
 
 .linkedin a {
