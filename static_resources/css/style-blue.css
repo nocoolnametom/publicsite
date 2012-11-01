@@ -312,10 +312,6 @@ li#social {
 	background: url("../images/linkedin.png") no-repeat center left;
 }
 
-.flickr a {
-	background: url("../images/flickr.png") no-repeat center left;
-}
-
 .gplus a {
 	background: url("../images/gplus.png") no-repeat center left;
 	background-size: 44px 44px;
@@ -326,14 +322,6 @@ li#social {
 	background: url("../images/github.png") no-repeat center left;
 	background-size: 56px 56px;
 	background-position: -2px 3px;
-}
-
-.lastfm a {
-	background: url("../images/lastfm.png") no-repeat center left;
-}
-
-.delicious a {
-	background: url("../images/delicious.png") no-repeat center left;
 }
 
 .blogger a {
