@@ -1,0 +1,523 @@
+:root {
+  --mainTextColor: hsl(0, 0%, 17%);
+  --greyTextColor: hsl(0, 0%, 40%);
+  --lightTextColor: hsl(0, 0%, 45%);
+  --redTextColor: hsl(360, 75%, 30%, 1);
+  --blueBackground: #D4D7FE;
+  --fontSize: 15;
+}
+
+@page { size: auto;  margin: 5mm; }
+
+@font-face {
+  font-family: Scriptina;
+  src: url('./scriptina.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Main Grid */
+.resume {
+  font-size: var(--fontSize);
+  max-width: 1000px;
+  margin: 0 auto;
+  color: var(--mainTextColor);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: top;
+  grid-template-areas:
+    "applicant  applicant"
+    "applicant  applicant"
+    "resume     resume"
+    "experience contact"
+    "experience skills"
+    "experience certifications"
+    "experience languages"
+    "experience selfDescription"
+    "updated updated";
+
+  &::before {
+    grid-area: resume;
+    justify-self: center;
+  }
+
+  & > .contact {
+    grid-area: contact;
+  }
+  & > .applicant {
+    grid-area: applicant;
+    justify-self: center;
+  }
+  & > .experience {
+    grid-area: experience;
+  }
+  & > .certifications {
+    grid-area: certifications;
+  }
+  & > .skills {
+    grid-area: skills;
+  }
+  & > .languages {
+    grid-area: languages;
+  }
+  & > .selfDescription {
+    grid-area: selfDescription;
+  }
+  & > .updated {
+    grid-area: updated;
+    align-self: bottom;
+  }
+}
+
+/* Contact Grid */
+.contact {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "contactEmail"
+    "contactAddress"
+    "contactPhone"
+    "contactWebsites";
+  & > .email {
+    grid-area: contactEmail;
+  }
+  & > .address {
+    grid-area: contactAddress;
+  }
+  & > .phone {
+    grid-area: contactPhone;
+  }
+  & > .websites {
+    grid-area: contactWebsites;
+  }
+}
+
+/* Main Display */
+body {
+  /* font-family: system-ui; */
+}
+a {
+  color: var(--mainTextColor);
+  text-decoration: none;
+
+  &:empty::after {
+    content: attr(href);
+  }
+
+  &.email::after {
+    content: "";
+  }
+}
+
+.resume {
+  & > .applicant {
+    text-align: center;
+    & > .name {
+      font-size: xx-large;
+      font-family: "Gill Sans", Lato, Calibri, Candara, Dubai, sans-serif;
+    }
+    & > .title {
+      color: var(--greyTextColor);
+    }
+    & > .photo {
+      display: none;
+    }
+  }
+  &::before {
+    color: var(--redTextColor);
+    margin: -0.75em 0 0;
+  }
+}
+
+/* Section Cards */
+.contact,
+.experience,
+.certifications,
+.skills,
+.languages,
+.selfDescription {
+  /* border-radius: 5px; */
+  /* padding: 0.5em 1em 1em; */
+  /* box-shadow: 0 2px 6px 0 hsla(0, 0%, 0%, 0.2); */
+  margin: 1em 1em 0;
+
+  &::before {
+    display: block;
+    color: var(--redTextColor);
+    font-variant-caps: petite-caps;
+    font-size: larger;
+    border-bottom: 0.5px solid var(--lightTextColor);
+    margin-bottom: 0.25em;
+  }
+}
+
+.resume::before {
+  content: "Curriculum Vitae";
+  font-family: Scriptina, serif;
+}
+
+/* Contact Grid */
+.contact {
+  display: grid;
+  grid-template-columns: 3em 1fr;
+  align-items: top;
+  grid-template-areas:
+    "border address"
+    "border phone"
+    "border email"
+    "border websites"
+    ;
+
+  &::after {
+    grid-area: border;
+    height: 100%;
+    color: transparent;
+    content: " ";
+    border-right: 1px solid black;
+    margin-right: 1em;
+  }
+  & > .phone {
+    position: relative;
+    grid-area: phone;
+    &::before {
+      position: absolute;
+      left: -2em;
+      transform: translateX(-50%);
+      font-size: var(--fontSize);
+      content: "\260e";
+    }
+  }
+  & > .email {
+    position: relative;
+    grid-area: email;
+    &:before {
+      position: absolute;
+      left: -2em;
+      transform: translateX(-50%);
+      font-size: var(--fontSize);
+      content: "\2709";
+    }
+  }
+  & > .websites {
+    position: relative;
+    grid-area: websites;
+    &:before {
+      position: absolute;
+      left: -2em;
+      transform: translateX(-50%);
+      font-size: var(--fontSize);
+      content: "\261B";
+    }
+  }
+  & > .address {
+    position: relative;
+    grid-area: address;
+    &:before {
+      position: absolute;
+      left: -2em;
+      transform: translateX(-50%);
+      font-size: var(--fontSize);
+      content: "\2691";
+    }
+  }
+}
+
+/* Contact Section */
+.contact {
+  -webkit-print-color-adjust: exact;
+  background-color: var(--blueBackground);
+
+  & > .websites > a,
+  & > .email > a {
+    display: block;
+    color: #FF0080 !important;
+  }
+
+  & > .address {
+    font-size: 0;
+    & > * {
+      display: inline-block;
+      font-size: var(--fontSize);
+    }
+    & > .street {
+      display: none;
+    }
+    & > .city::before {
+      content: "Current Residence @ ";
+    }
+    & > .city::after {
+      content: ",\00a0";
+    }
+    & > .state::after {
+      content: "\00a0";
+    }
+    & > .zipCodePlusFour::before {
+      content: "-";
+    }
+  }
+}
+
+/* Experience Section */
+.experience {
+  &::before {
+    content: "Work Experience";
+  }
+
+  & > .entry {
+    margin-top: 1em;
+    &:first-child {
+      margin-top: 0;
+    }
+    & > .range {
+      text-align: right;
+      & > * {
+        display: inline-block;
+        font-variant-caps: petite-caps;
+      }
+      & > .start::after {
+        content: " - ";
+      }
+      & > .end:empty::after {
+        font-style: italic;
+        font-variant-caps: normal;
+        content: "Current";
+      }
+    }
+    & > .position {
+      font-weight: bolder;
+    }
+    & > .companyName {
+      font-variant-caps: petite-caps;
+      &::before {
+        font-variant-caps: normal;
+        content: ' at '
+      }
+    }
+    & > .contactInfo {
+      & > * {
+        margin-left: 1em;
+        font-size: smaller;
+        display: inline-block;
+        color: var(--greyTextColor);
+        text-decoration: none;
+        &:first-child {
+          margin-left: 0;
+        }
+      }
+      & .phone {
+        &::before,
+        &::after {
+          font-weight: 400;
+        }
+        &::before {
+          content: '(';
+        }
+        &::after {
+          content: ')';
+        }
+      }
+    }
+    & > .mission {
+      font-style: italic;
+    }
+    & > .position,
+    & > .companyName {
+      display: inline-block;
+    }
+    & > .location {
+      & > .city,
+      & > .state {
+        display: inline-block;
+      }
+      & > .city::after {
+        content: ",";
+      }
+    }
+    & > .description {
+      margin-top: 0.5em;
+      font-size: smaller;
+    }
+  }
+}
+
+/* Certification Section */
+.certifications {
+  &::before {
+    content: "Certifications";
+  }
+
+  & > .entry {
+    border-top: 1px solid var(--lightTextColor);
+    &:first-child {
+      border-top: 0;
+    }
+    padding: 0.5em;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+    grid-template-areas:
+      "name    achieved"
+      "covers  covers"
+      "license license";
+
+    & > .name {
+      grid-area: name;
+      font-variant-caps: petite-caps;
+    }
+    & > .covers {
+      grid-area: covers;
+    }
+    & > .achieved {
+      grid-area: achieved;
+      justify-self: right;
+    }
+    & > .license {
+      &:empty {
+        display: none;
+      }
+      &::before {
+        content: 'License: ';
+      }
+      grid-area: license;
+    }
+  }
+}
+
+/* Skills Section */
+.skills {
+  &::before {
+    content: "Computer Skills";
+  }
+
+  & > ul {
+    margin: 0.5em 0 0;
+    padding-left: 4em;
+    list-style-type: none;
+    position: relative;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &::before {
+      position: absolute;
+      top: 0;
+      right: calc(100% - 3.5em);
+       color: var(--greyTextColor);
+    }
+
+    & li {
+      display: inline;
+      font-size: 0;
+      &:last-child::after {
+        content: '';
+      }
+      &::after {
+        font-size: var(--fontSize);
+        content: ',';
+      }
+    }
+  }
+  & > .best::before,
+  & > .better::before,
+  & > .good::before,
+  & > .interests::before {
+    content: attr(class);
+    text-transform: capitalize;
+  }
+
+  & .tech {
+    &::before {
+      font-size: var(--fontSize);
+      content: attr(data-name);
+      text-transform: capitalize;
+    }
+    &[data-name="aws"]::before,
+    &[data-name="php"]::before {
+      text-transform: uppercase;
+    }
+    &[data-name="curl"]::before {
+      text-transform: none;
+      content: "cURL";
+    }
+    &[data-name="javascript"]::before {
+      text-transform: none;
+      content: "Javascript";
+    }
+    &[data-name="typescript"]::before {
+      text-transform: none;
+      content: "Typescript";
+    }
+    &[data-name="build tools"]::before {
+      text-transform: none;
+      content: "Build Tools";
+    }
+    &[data-name="mysql"]::before {
+      text-transform: none;
+      content: "MySQL";
+    }
+    &[data-name="nodejs"]::before {
+      text-transform: none;
+      content: "NodeJS";
+    }
+    &[data-name="latex"]::before {
+      text-transform: none;
+      font-variant-caps: petite-caps;
+      content: "LaTeX";
+    }
+  }
+}
+
+/* Languages Section */
+.languages {
+  &::before {
+    content: "Languages";
+  }
+
+  & > .language {
+    & > * {
+      display: inline-block;
+    }
+    & > .name {
+      font-variant-caps: petite-caps;
+      padding-right: 0.75em;
+    }
+  }
+}
+
+/* Self-Description Section */
+.selfDescription {
+  &::before {
+    content: "Description";
+  }
+}
+
+.updated {
+  font-size: x-small;
+  text-align: right;
+  color: var(--lightTextColor);
+  &::before {
+    content: 'Last Update: ';
+  }
+}
+
+@custom-media --small-viewport (max-width: 600px);
+@media (--small-viewport) {
+  .zipCode {
+    padding-left: 1.75em;
+    & + .zipCodePlusFour {
+      display: none !important;
+    }
+  }
+  .city + .state {
+    font-size: 0 !important;
+    color: transparent;
+    max-width: 0;
+    &::before {
+      font-size: var(--fontSize);
+      color: initial;
+      content: attr(data-acronym);
+    }
+  }
+}

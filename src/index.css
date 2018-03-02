@@ -1,0 +1,59 @@
+.resume {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: last baseline;
+  grid-template-areas:
+    "photo           experience"
+    "name            experience"
+    "title           experience"
+    "selfDescription experience"
+    "contact contact"
+    "certifications certifications"
+    "skills skills"
+    "languages languages"
+    "selfDescription selfDescription"
+    "updated updated";
+  & > .photo {
+    grid-area: photo;
+  }
+  & > .contact {
+    grid-area: contact;
+  }
+  & > .experience {
+    grid-area: experience;
+  }
+  & > .certifications {
+    grid-area: certifications;
+  }
+  & > .skills {
+    grid-area: skills;
+  }
+  & > .languages {
+    grid-area: languages;
+  }
+  & > .selfDescription {
+    grid-area: selfDescription;
+  }
+  & > .updated {
+    grid-area: updated;
+  }
+  & > .name {
+    grid-area: name;
+    font-size: x-large;
+    font-family: sans-serif;
+    color: white;
+    font-weight: 500;
+    text-shadow: 0px 2px 16px rgba(0,0,0,0.4),
+                0px 8px 13px rgba(0,0,0,0.1),
+                0px 18px 23px rgba(0,0,0,0.1);
+  }
+  & > .title {
+    grid-area: title;
+    font-family: sans-serif;
+    color: white;
+    font-weight: 400;
+    text-shadow: 0px 2px 16px rgba(0,0,0,0.4),
+                0px 8px 13px rgba(0,0,0,0.1),
+                0px 18px 23px rgba(0,0,0,0.1);
+  }
+}
