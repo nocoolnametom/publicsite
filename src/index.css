@@ -1,59 +1,601 @@
+:root {
+  --blueBackground: #5da4d9;
+  --leftMargin: 60px;
+  --fontSize: 12pt;
+  --skillSize: 10pt;
+  --columnGap: 25px;
+}
+
+@font-face {
+  font-family: Scriptina;
+  src: url("./scriptina.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  background-color: #eae8e7;
+  line-height: 20px;
+}
+
 .resume {
+  font-size: var(--fontSize);
+  max-width: 1000px;
+  margin: var(--leftMargin) auto 0;
+  padding: 0 var(--leftMargin);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: last baseline;
+  grid-template-columns: 350px 1fr;
+  grid-column-gap: var(--columnGap);
+  align-items: stretch;
   grid-template-areas:
-    "photo           experience"
-    "name            experience"
-    "title           experience"
+    "applicant       experience"
     "selfDescription experience"
-    "contact contact"
-    "certifications certifications"
-    "skills skills"
-    "languages languages"
-    "selfDescription selfDescription"
-    "updated updated";
-  & > .photo {
-    grid-area: photo;
+    "contact         experience"
+    "skills          experience"
+    "skills          certifications"
+    "skills          languages"
+    "updated         updated"
+    "app             app";
+
+  & > .applicant {
+    grid-area: applicant;
+    background-color: var(--blueBackground);
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+
+    & > .photo {
+      width: 100%;
+      overflow: hidden;
+      margin: 0;
+
+      & > img {
+        display: block;
+        width: 100%;
+        margin: -10% 0;
+      }
+    }
+
+    & > .name {
+      transform: translate(var(--leftMargin), calc(-70px - 1.25em));
+      font-size: x-large;
+      font-family: sans-serif;
+      color: white;
+      height: 0;
+      font-weight: 500;
+      text-shadow: 0px 2px 16px rgba(0, 0, 0, 0.4),
+        0px 8px 13px rgba(0, 0, 0, 0.1), 0px 18px 23px rgba(0, 0, 0, 0.1);
+    }
+
+    & > .title {
+      transform: translate(var(--leftMargin), calc(-70px + 0.5em));
+      font-family: sans-serif;
+      color: white;
+      height: 0;
+      font-weight: 400;
+      text-shadow: 0px 2px 16px rgba(0, 0, 0, 0.4),
+        0px 8px 13px rgba(0, 0, 0, 0.1), 0px 18px 23px rgba(0, 0, 0, 0.1);
+    }
   }
+
+  & > .self-description,
+  & > .contact > *,
+  & > .skills {
+    &::before {
+      position: absolute;
+      left: calc(var(--leftMargin) / 2);
+      top: calc(var(--leftMargin) / 2);
+      transform: translate(-50%, -50%);
+      font-size: x-large;
+      display: block;
+      content: "\2766";
+    }
+  }
+
+  & > .self-description {
+    z-index: 1;
+    display: grid;
+    grid-area: selfDescription;
+    font-family: sans-serif;
+    line-height: 1.5;
+    font-weight: 300;
+    font-size: smaller;
+    color: white;
+    position: relative;
+    padding: 1em 2em 0 var(--leftMargin);
+    background-color: var(--blueBackground);
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+
+    &::before {
+      content: "\2766";
+    }
+
+    &::after {
+      display: block;
+      content: "";
+      margin: 2.5em -2em 1em 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    }
+  }
+
   & > .contact {
+    z-index: 2;
+    transform: translate3d(0, 0, 0);
     grid-area: contact;
+    display: grid;
+    overflow-x: hidden;
+    align-items: start;
+    grid-template-areas:
+      "phone"
+      "email"
+      "address"
+      "websites";
+    background-color: var(--blueBackground);
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+
+    & a {
+      color: white;
+      text-decoration: none;
+    }
+
+    & > * {
+
+      z-index: 5;
+      font-family: sans-serif;
+      line-height: 1.5;
+      color: white;
+      position: relative;
+      background-color: var(--blueBackground);
+
+      &::after {
+        margin: 2em -2em 1em 0;
+        display: block;
+        content: "";
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+      }
+
+      &:first-child::after {
+        margin: 2em 0em 1em 0;
+      }
+
+      &:last-child::after {
+        margin: 2em -0.5em 1em 0;
+      }
+    }
+
+    & > .phone {
+      grid-area: phone;
+      padding: 1em 0em 0 var(--leftMargin);
+
+      &::before {
+        content: "\1F4F1";
+      }
+    }
+
+    & > .email {
+      grid-area: email;
+      padding: 1em 2em 0 var(--leftMargin);
+
+      &::before {
+        content: "\1F4E7";
+      }
+    }
+
+    & > .address {
+      grid-area: address;
+      padding: 1em 2em 0 var(--leftMargin);
+
+      & > * {
+        display: inline-block;
+        font-size: var(--fontSize);
+      }
+
+      & > .street {
+        display: block;
+      }
+
+      & > .city::after {
+        content: ",\00a0";
+      }
+
+      & > .state::after {
+        content: "\00a0";
+      }
+
+      & > .zip-code-plus-four::before {
+        margin-left: -0.2em;
+        content: "-";
+      }
+
+      &::before {
+        content: "\1F3F7";
+      }
+    }
+
+    & > .websites {
+      grid-area: websites;
+      padding: 1em 6px 0 var(--leftMargin);
+
+      &::before {
+        content: "\1F517";
+      }
+    }
   }
+
+  & > .skills {
+    z-index: 3;
+    grid-area: skills;
+
+    font-family: sans-serif;
+    line-height: 1.5;
+    font-weight: 300;
+    font-size: smaller;
+    color: white;
+    position: relative;
+    padding: 1em 2em 2em var(--leftMargin);
+    background-color: var(--blueBackground);
+
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+
+    &::before {
+      content: "\1F4BB";
+    }
+
+    display: grid;
+    align-items: start;
+    grid-template-areas:
+      "title"
+      "best"
+      "better"
+      "good";
+
+    &::after {
+      grid-area: title;
+      font-size: large;
+      display: block;
+      font-weight: 500;
+      content: "Professional Skills";
+      margin-bottom: 1em;
+    }
+
+    & > ul {
+      margin: 0.5em 0 0;
+      padding-left: 4em;
+      list-style-type: none;
+      position: relative;
+
+      &:first-child {
+        margin-top: 0;
+      }
+
+      &::before {
+        position: absolute;
+        top: 0;
+        right: calc(100% - 3em);
+      }
+
+      & li {
+        display: inline;
+        font-size: 0;
+
+        &:last-child::after {
+          content: "";
+        }
+
+        &::after {
+          font-size: var(--skillSize);
+          content: ",";
+        }
+      }
+    }
+
+    & > *::before {
+      content: attr(class);
+      font-size: var(--fontSize);
+      font-weight: 400;
+      transform: translate(-1em, -0.2em);
+      text-transform: capitalize;
+    }
+
+    & .tech {
+      &::before {
+        font-size: var(--skillSize);
+        content: attr(data-name);
+        text-transform: capitalize;
+      }
+
+      &[data-name="aws"]::before,
+      &[data-name="php"]::before {
+        text-transform: uppercase;
+      }
+
+      &[data-name="curl"]::before {
+        text-transform: none;
+        content: "cURL";
+      }
+
+      &[data-name="javascript"]::before {
+        text-transform: none;
+        content: "Javascript";
+      }
+
+      &[data-name="typescript"]::before {
+        text-transform: none;
+        content: "Typescript";
+      }
+
+      &[data-name="build tools"]::before {
+        text-transform: none;
+        content: "Build Tools";
+      }
+
+      &[data-name="mysql"]::before {
+        text-transform: none;
+        content: "MySQL";
+      }
+
+      &[data-name="nodejs"]::before {
+        text-transform: none;
+        content: "NodeJS";
+      }
+
+      &[data-name="latex"]::before {
+        text-transform: none;
+        font-variant-caps: petite-caps;
+        content: "LaTeX";
+      }
+    }
+  }
+
   & > .experience {
     grid-area: experience;
+    background-color: white;
+    font-family: sans-serif;
+    color: rgba(0, 0, 0, 0.6);
+    position: relative;
+    padding-left: calc(var(--leftMargin) * 1.5);
+    padding-top: calc(var(--leftMargin) / 1.5);
+    margin-bottom: var(--columnGap);
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+
+    &::before {
+      display: block;
+      content: "Work Experience";
+      padding-bottom: 1em;
+      font-size: x-large;
+      font-family: sans-serif;
+      font-weight: 600;
+    }
+
+    &::after {
+      position: absolute;
+      color: initial;
+      left: calc(var(--leftMargin) * 0.75);
+      top: calc(var(--leftMargin) / 2);
+      transform: translateX(-50%);
+      font-size: xx-large;
+      display: block;
+      content: "\1F4BC";
+    }
+
+    & > .entry {
+      line-height: 1.5;
+      padding-right: calc(var(--leftMargin) * 1.5);
+
+      &:last-child > .description::after {
+        border-bottom: 0;
+        margin-bottom: 0;
+      }
+
+      & > .range {
+        position: relative;
+
+        & > * {
+          display: inline-block;
+          text-transform: uppercase;
+          font-size: smaller;
+          color: var(--blueBackground);
+        }
+
+        & > .end::before {
+          content: " - ";
+        }
+
+        & > .end:empty::before {
+          font-variant-caps: petite-caps;
+          background: white;
+          position: absolute;
+          left: 0;
+          top: 0;
+          content: "Current";
+        }
+      }
+
+      & > .position {
+        font-weight: 600;
+        display: inline-block;
+      }
+
+      & > .company-name {
+        font-weight: 600;
+        display: inline-block;
+        font-size: smaller;
+
+        &::before {
+          content: "@";
+        }
+      }
+
+      & > .location {
+        display: none;
+      }
+
+      & > .mission {
+        display: none;
+      }
+
+      & > .contact-info {
+        & a {
+          color: rgba(0, 0, 0, 0.4);
+          text-decoration: none;
+
+          &:empty::after {
+            content: attr(href);
+          }
+
+          &.email::after {
+            content: "";
+          }
+        }
+
+        & > * {
+          margin-left: 1em;
+          font-size: smaller;
+          display: inline-block;
+          &:first-child {
+            margin-left: 0;
+          }
+        }
+
+        & .phone {
+          display: none;
+        }
+      }
+
+      & > .description {
+        font-size: var(--skillSize);
+
+        &::after {
+          padding-top: 2em;
+          border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+          margin-bottom: 2em;
+          margin-right: calc(0 - calc(var(--leftMargin) * 1.5));
+          content: "";
+          display: block;
+        }
+      }
+    }
   }
+
   & > .certifications {
     grid-area: certifications;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+
+    background-color: white;
+    font-family: sans-serif;
+    color: rgba(0, 0, 0, 0.6);
+    position: relative;
+    padding: 2em 0 2em calc(var(--leftMargin) * 1.5);
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+    margin-bottom: var(--columnGap);
+
+    &::after {
+      position: absolute;
+      color: initial;
+      left: calc(var(--leftMargin) * 0.75);
+      top: calc(var(--leftMargin) / 2);
+      transform: translateX(-50%);
+      font-size: xx-large;
+      display: block;
+      content: "\1F4DD";
+    }
+
+    & > .entry {
+      font-size: smaller;
+
+      & > .name {
+        font-size: larger;
+        font-weight: 600;
+      }
+
+      & > .license {
+        &::before {
+          content: "License: ";
+        }
+
+        &:empty::before {
+          content: "";
+        }
+      }
+    }
   }
-  & > .skills {
-    grid-area: skills;
-  }
+
   & > .languages {
     grid-area: languages;
-  }
-  & > .selfDescription {
-    grid-area: selfDescription;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+
+    background-color: white;
+    font-family: sans-serif;
+    color: rgba(0, 0, 0, 0.6);
+    position: relative;
+    padding: 2em 0 2em calc(var(--leftMargin) * 1.5);
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+
+    &::after {
+      position: absolute;
+      color: initial;
+      left: calc(var(--leftMargin) * 0.75);
+      top: calc(var(--leftMargin) / 2);
+      transform: translateX(-50%);
+      font-size: xx-large;
+      display: block;
+      content: "\1F4AC";
+    }
+
+    & > .language {
+      & > .name {
+        font-variant-caps: petite-caps;
+      }
+    }
   }
   & > .updated {
+    padding-bottom: calc(var(--leftMargin) - 1em);
     grid-area: updated;
+    text-align: right;
+    font-size: smaller;
+    color: rgba(0, 0, 0, 0.4);
+
+    &::before {
+      content: "Last updated on ";
+    }
   }
-  & > .name {
-    grid-area: name;
-    font-size: x-large;
-    font-family: sans-serif;
-    color: white;
-    font-weight: 500;
-    text-shadow: 0px 2px 16px rgba(0,0,0,0.4),
-                0px 8px 13px rgba(0,0,0,0.1),
-                0px 18px 23px rgba(0,0,0,0.1);
+
+  & > .contact-me-app {
+    grid-area: app;
   }
-  & > .title {
-    grid-area: title;
-    font-family: sans-serif;
-    color: white;
-    font-weight: 400;
-    text-shadow: 0px 2px 16px rgba(0,0,0,0.4),
-                0px 8px 13px rgba(0,0,0,0.1),
-                0px 18px 23px rgba(0,0,0,0.1);
+}
+
+[data-prefix]::before {
+  content: attr(data-prefix) "\00a0";
+}
+
+@custom-media --small-desktop-viewport (max-width: 1110px);
+
+@media (--small-desktop-viewport) {
+  [data-prefix="Senior"]::before {
+    content: "Sr ";
+  }
+
+  .zip-code {
+    padding-left: 1.75em;
+
+    & + .zip-code-plus-four {
+      display: none !important;
+    }
+  }
+
+  .city + .state[data-acronym] {
+    font-size: 0 !important;
+    color: transparent;
+    max-width: 0;
+
+    &::before {
+      font-size: var(--fontSize);
+      color: white;
+      content: attr(data-acronym);
+    }
   }
 }
