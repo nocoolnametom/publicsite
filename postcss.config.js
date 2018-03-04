@@ -5,6 +5,6 @@ module.exports = ctx => ({
     'postcss-cssnext': {
       warnForDuplicates: false,
     },
-    'cssnano': {}, // ctx.env === 'production' ? {} : false
+    'cssnano': {},
   }
 });

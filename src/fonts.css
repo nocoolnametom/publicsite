@@ -4,3 +4,11 @@
   font-weight: normal;
   font-style: normal;
 }
+
+/* This ensures that we have the Scriptina font loaded before printing! */
+
+.resume::after {
+  content: " ";
+  font-size: 0;
+  font-family: Scriptina, serif;
+}

@@ -1,9 +1,21 @@
+@custom-media --large-desktop-viewport (min-width: 1111px);
+
+@custom-media --medium-desktop-viewport (max-width: 1110px);
+
+@custom-media --small-desktop-viewport (max-width: 1000px);
+
+@custom-media --mini-desktop-viewport (max-width: 850px);
+
 :root {
   --blueBackground: #5da4d9;
   --leftMargin: 60px;
   --fontSize: 12pt;
   --skillSize: 10pt;
   --columnGap: 25px;
+
+  --smallLeftMargin: 40px;
+  --smallFontSize: 10pt;
+  --smallSkillSize: 8pt;
 }
 
 @font-face {
@@ -25,7 +37,7 @@ body {
   margin: var(--leftMargin) auto 0;
   padding: 0 var(--leftMargin);
   display: grid;
-  grid-template-columns: 350px 1fr;
+  grid-template-columns: 35% 1fr;
   grid-column-gap: var(--columnGap);
   align-items: stretch;
   grid-template-areas:
@@ -56,7 +68,7 @@ body {
     }
 
     & > .name {
-      transform: translate(var(--leftMargin), calc(-70px - 1.25em));
+      transform: translate(var(--leftMargin), calc(-40px - 1em));
       font-size: x-large;
       font-family: sans-serif;
       color: white;
@@ -67,7 +79,7 @@ body {
     }
 
     & > .title {
-      transform: translate(var(--leftMargin), calc(-70px + 0.5em));
+      transform: translate(var(--leftMargin), calc(-40px + 0.25em));
       font-family: sans-serif;
       color: white;
       height: 0;
@@ -87,7 +99,6 @@ body {
       transform: translate(-50%, -50%);
       font-size: x-large;
       display: block;
-      content: "\2766";
     }
   }
 
@@ -217,6 +228,10 @@ body {
 
       &::before {
         content: "\1F517";
+      }
+
+      & a {
+        display: block;
       }
     }
   }
@@ -572,9 +587,8 @@ body {
   content: attr(data-prefix) "\00a0";
 }
 
-@custom-media --small-desktop-viewport (max-width: 1110px);
 
-@media (--small-desktop-viewport) {
+@media (--medium-desktop-viewport) {
   [data-prefix="Senior"]::before {
     content: "Sr ";
   }
@@ -597,5 +611,172 @@ body {
       color: white;
       content: attr(data-acronym);
     }
+  }
+}
+
+@media (--small-desktop-viewport) {
+  .resume,
+  .resume > .contact > .address > *,
+  .resume > .skills > *::before,
+  .resume .city + .state[data-acronym]::before {
+    font-size: var(--smallFontSize);
+  }
+
+  .resume > .skills > ul > li::after,
+  .resume > .skills .tech::before,
+  .resume > .experience > .entry > .description {
+    font-size: var(--smallSkillSize);
+  }
+}
+
+@media (--mini-desktop-viewport) {
+  .resume {
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    grid-template-columns: 1fr;
+    grid-column-gap: 0;
+    align-items: stretch;
+    grid-template-areas:
+      "applicant"
+      "selfDescription"
+      "contact"
+      "skills"
+      "experience"
+      "certifications"
+      "languages"
+      "updated"
+      "app";
+
+    & > .applicant > .name {
+      text-align: center;
+      transform: translate(0, -2.5em);
+    }
+
+    & > .applicant > .title {
+      transform: translate(0, -2em);
+      text-align: center;
+    }
+
+    & > .self-description::before,
+    & > .contact > *::before,
+    & > .skills::before,
+    & > .experience::after,
+    & > .languages::after,
+    & > .certifications::after {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: x-large;
+      display: block;
+    }
+
+    & > .self-description::before,
+    & > .contact > *::before,
+    & > .skills::before {
+      top: 10px;
+    }
+
+    & > .experience::after,
+    & > .languages::after,
+    & > .certifications::after {
+      top: 15px;
+    }
+
+
+    & > .self-description {
+      padding: 50px 3em 0;
+
+      &::after {
+        margin: 2.5em -3em 1em;
+      }
+    }
+  }
+
+  .resume > .contact {
+    & > .phone,
+    & > .email,
+    & > .address,
+    & > .websites {
+      padding: 3em 0 0 0;
+      text-align: center;
+    }
+  }
+
+  .resume > .skills {
+    padding: 4em 1em 2em;
+    margin-bottom: 25px;
+
+    &::after {
+      text-align: center;
+    }
+
+    & > ul {
+      padding-left: 7em;
+
+      &::before {
+        right: calc(100% - 6em);
+      }
+    }
+  }
+
+  .resume > .certifications,
+  .resume > .languages {
+    padding: 3em 3em 2em;
+    text-align: center;
+    grid-template-columns: 1fr;
+    grid-gap: 0;
+  }
+
+  .resume > .languages > .language,
+  .resume > .certifications > .entry {
+    padding-top: 1em;
+
+    &:first-child {
+      padding-top: 0;
+    }
+  }
+
+  .resume > .experience {
+    padding: 3em 0 0;
+
+    &::before {
+      text-align: center;
+    }
+
+    & > .entry {
+      padding: 0 2em;
+      text-align: center;
+
+      & > .range > .end:empty::before {
+        top: 0.2em;
+        content: "Current";
+        left: 50%;
+        transform: translateX(-50%);
+      }
+
+      & > .description::after {
+        margin: 0 -2.5em 2em;
+      }
+    }
+  }
+
+  .resume > .updated {
+    padding-bottom: 0;
+    padding-top: 1em;
+  }
+
+  .resume,
+  .resume > .contact > .address > *,
+  .resume > .skills > *::before,
+  .resume .city + .state[data-acronym]::before {
+    font-size: var(--fontSize);
+  }
+
+  .resume > .skills > ul > li::after,
+  .resume > .skills .tech::before,
+  .resume > .experience > .entry > .description {
+    font-size: var(--skillSize);
   }
 }
