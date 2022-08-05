@@ -1,6 +1,6 @@
 console.log(
-  ' My name is Tom Doggett.  I am a Senior Software Engineer at Zillow Group,',
-  'working in downtown San Francisco.  Zillow Group is one of the larger',
+  ['%c My name is Tom Doggett.  I am a Senior Software Engineer at Zillow Group,',
+  'working remotely in Ithaca, New York.  Zillow Group is one of the larger',
   'Silicon Valley success stories, helping people search for a new home and',
   'connecting them with helpful, real estate exports.',
   '\n\n',
@@ -13,8 +13,7 @@ console.log(
   'print version targeted Chrome on MacOS and just ensured nothing looked',
   'horrible for other browsers and operating systems.',
   '\n\n',
-  'I am not currently looking for a new job.  Unless it\'s in Scotland,',
-  'Ireland, or Canada: those are cool places I want to live with my family but',
-  'they\'re also pretty tough to get into.  I\'d leave Silicon Valley for',
-  'that, but not much else.',
+  'I am not currently looking for a new job, but if you have a job in mind,',
+  'please contact me at tom@tomdoggett.net',].join(' '),
+  'background-color: rgba(0,0,0,.01); font-family: sans; color: rgba(0,0,0,.8); font-size: 1.1em;'
 );

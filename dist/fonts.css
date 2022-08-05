@@ -1,2 +1,2 @@
-@font-face{font-family:Scriptina;src:url(scriptina.woff) format("woff");font-weight:400;font-style:normal}.resume:after{content:" ";font-size:0;font-family:Scriptina,serif}
+@font-face{font-family:Scriptina;font-style:normal;font-weight:400;src:url(scriptina.woff) format("woff")}.resume:after{content:" ";font-family:Scriptina,serif;font-size:0}
 /*# sourceMappingURL=fonts.css.map */

@@ -305,6 +305,10 @@ a {
       margin-top: 0;
     }
 
+    &:nth-child(n+4) {
+      display: none;
+    }
+
     & > .range {
       text-align: right;
 
@@ -594,7 +598,6 @@ a {
   .city + .state {
     font-size: 0 !important;
     color: transparent;
-    max-width: 0;
 
     &::before {
       font-size: var(--fontSize);

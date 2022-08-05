@@ -45,8 +45,8 @@ body {
     "selfDescription experience"
     "contact         experience"
     "skills          experience"
-    "skills          certifications"
-    "skills          languages"
+    "certifications  certifications"
+    "languages       languages"
     "updated         updated"
     "app             app";
 
@@ -92,6 +92,8 @@ body {
   & > .self-description,
   & > .contact > *,
   & > .skills {
+    margin-bottom: var(--columnGap);
+
     &::before {
       position: absolute;
       left: calc(var(--leftMargin) / 2);
